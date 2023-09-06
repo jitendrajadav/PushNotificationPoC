@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "588063790106",
+    "project_id": "dspmobile-1c3f0",
+    "storage_bucket": "dspmobile-1c3f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588063790106:android:97c5f454a8d8de8dd82da3",
+        "android_client_info": {
+          "package_name": "com.pcfcorp.dspmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "588063790106-mnsl900e2mdj9qfg5tes7q91c4rmcdcv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBD2Zt2fGld8UKR_xJw7QO6-XSaKWTyaJE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "588063790106-mnsl900e2mdj9qfg5tes7q91c4rmcdcv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
