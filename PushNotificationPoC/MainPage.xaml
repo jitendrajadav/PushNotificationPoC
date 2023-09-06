@@ -18,8 +18,12 @@
         <Button 
             Clicked="OnClickSendNotificationHandler"
             VerticalOptions="CenterAndExpand"
-            Text="Send Notification"/>
-        
+            Text="Get Token"/>
+
+        <Label
+            Margin="20"
+            x:Name="token"/>
+
     </StackLayout>
 
 </ContentPage>

@@ -14,7 +14,7 @@ namespace PushNotificationPoC
             MainPage = new MainPage();
 
             LocalNotificationCenter.Current.RegisterCategoryList(new HashSet<NotificationCategory>(new List<NotificationCategory>()
-        {
+            {
                 new NotificationCategory(Plugin.LocalNotification.NotificationCategoryType.Status)
                 {
                     ActionList = new HashSet<NotificationAction>( new List<NotificationAction>()
@@ -46,7 +46,7 @@ namespace PushNotificationPoC
                         }
                     })
                 }
-        }));
+            }));
 
             // Local Notification tap event listener
             LocalNotificationCenter.Current.NotificationActionTapped += Current_NotificationActionTapped;
@@ -74,7 +74,7 @@ namespace PushNotificationPoC
             }
         }
 
-        protected override void OnStart()
+        protected override async void OnStart()
         {
             //var status = await Permissions.CheckStatusAsync<Permissions.LocationAlways>();
             //if (status != PermissionStatus.Granted)
@@ -82,11 +82,9 @@ namespace PushNotificationPoC
             //    status = await Permissions.RequestAsync<Permissions.LocationAlways>();
             //}
 
-            //var Token = CrossFirebasePushNotification.Current.GetTokenAsync();
-            CrossFirebasePushNotification.Current.OnTokenRefresh += (s, p) =>
-            {
-                System.Diagnostics.Debug.WriteLine($"TOKEN : {p.Token}");
-            };
+            var Token = await CrossFirebasePushNotification.Current.GetTokenAsync();
+
+            System.Diagnostics.Debug.WriteLine($"TOKEN : {Token}");
 
             CrossFirebasePushNotification.Current.OnNotificationReceived += async (s, p) =>
             {

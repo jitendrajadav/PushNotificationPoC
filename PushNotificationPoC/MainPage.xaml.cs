@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plugin.FirebasePushNotification;
+using System;
 using Xamarin.Forms;
 
 namespace PushNotificationPoC
@@ -10,8 +11,10 @@ namespace PushNotificationPoC
             InitializeComponent();
         }
 
-        private void OnClickSendNotificationHandler(object sender, EventArgs e)
+        private async void OnClickSendNotificationHandler(object sender, EventArgs e)
         {
+            var Token = await CrossFirebasePushNotification.Current.GetTokenAsync();
+            token.Text = Token.ToString();
         }
     }
 }

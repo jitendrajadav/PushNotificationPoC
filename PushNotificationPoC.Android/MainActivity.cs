@@ -112,7 +112,7 @@ namespace PushNotificationPoC.Droid
                     new NotificationUserAction("Accept","Accept", NotificationActionType.Default, "check"),
                     new NotificationUserAction("Reject","Reject", NotificationActionType.Default, "cancel")
                     })
-                          }, false);
+                          }, true);
 #else
   FirebasePushNotificationManager.Initialize(this,
                 new NotificationUserCategory[]
