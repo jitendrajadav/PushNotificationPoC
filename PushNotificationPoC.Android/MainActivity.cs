@@ -27,7 +27,13 @@ namespace PushNotificationPoC.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
+            // Define a notification channel (Add the code here)
+            string channelId = "my_channel_id";
+            string channelName = "My Channel";
 
+            var channel = new NotificationChannel(channelId, channelName, NotificationImportance.Default);
+            var notificationManager = GetSystemService(NotificationService) as NotificationManager;
+            notificationManager.CreateNotificationChannel(channel);
 
             //Handle notification when app is closed here
             //CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>

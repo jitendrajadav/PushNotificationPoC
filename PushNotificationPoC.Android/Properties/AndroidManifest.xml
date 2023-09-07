@@ -19,6 +19,15 @@
 				<action android:name="Button2_Clicked" />
 			</intent-filter>
 		</receiver>-->
+
+		<receiver
+			android:name="crc647d4d529b533ac656.MyBroadcastReceiver"
+			android:exported="true">
+			<intent-filter>
+				<action android:name="my_custom_action" />
+				<!-- Action you expect to receive -->
+			</intent-filter>
+		</receiver>
 	</application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />

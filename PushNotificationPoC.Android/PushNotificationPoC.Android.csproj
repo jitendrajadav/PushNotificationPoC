@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Button1Receiver.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="MyBroadcastReceiver.cs" />
     <Compile Include="NoActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
