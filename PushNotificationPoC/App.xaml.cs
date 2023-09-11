@@ -1,6 +1,7 @@
 ﻿using Plugin.FirebasePushNotification;
 using Plugin.LocalNotification;
 using System.Collections.Generic;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace PushNotificationPoC
@@ -76,11 +77,22 @@ namespace PushNotificationPoC
 
         protected override async void OnStart()
         {
-            //var status = await Permissions.CheckStatusAsync<Permissions.LocationAlways>();
-            //if (status != PermissionStatus.Granted)
-            //{
-            //    status = await Permissions.RequestAsync<Permissions.LocationAlways>();
-            //}
+            var status = await Permissions.CheckStatusAsync<Permissions.LocationAlways>();
+            if (status != PermissionStatus.Granted)
+            {
+                status = await Permissions.RequestAsync<Permissions.LocationAlways>();
+            }
+
+
+            // Check if the app has battery optimization exemption
+            var status1 = await Permissions.CheckStatusAsync<Permissions.Battery>();
+
+            // If not granted, request it
+            if (status1 != PermissionStatus.Granted)
+            {
+                status1 = await Permissions.RequestAsync<Permissions.Battery>();
+            }
+
 
             var Token = await CrossFirebasePushNotification.Current.GetTokenAsync();
 
