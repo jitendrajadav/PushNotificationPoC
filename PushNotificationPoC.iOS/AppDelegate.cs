@@ -1,6 +1,5 @@
 ﻿using Foundation;
 using Plugin.FirebasePushNotification;
-using Plugin.LocalNotification;
 using System;
 using System.Collections.Generic;
 using UIKit;
@@ -24,11 +23,7 @@ namespace PushNotificationPoC.iOS
         {
             global::Xamarin.Forms.Forms.Init();
 
-            LocalNotificationCenter.SetUserNotificationCenterDelegate();
-
             LoadApplication(new App());
-
-
 
             FirebasePushNotificationManager.Initialize(options, new NotificationUserCategory[]
             {
@@ -73,7 +68,6 @@ namespace PushNotificationPoC.iOS
 
         public override void WillEnterForeground(UIApplication uiApplication)
         {
-            LocalNotificationCenter.ResetApplicationIconBadgeNumber(uiApplication);
             base.WillEnterForeground(uiApplication);
         }
     }

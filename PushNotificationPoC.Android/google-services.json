@@ -29,6 +29,13 @@
             {
               "client_id": "588063790106-mnsl900e2mdj9qfg5tes7q91c4rmcdcv.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "588063790106-k4fkp98hsp06efsdb0234qh09ti4ma52.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.pcfcorp.dspmobile"
+              }
             }
           ]
         }

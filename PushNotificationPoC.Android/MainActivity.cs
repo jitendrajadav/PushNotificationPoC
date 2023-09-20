@@ -6,9 +6,7 @@ using Android.Runtime;
 using AndroidX.Core.App;
 using Plugin.CurrentActivity;
 using Plugin.FirebasePushNotification;
-using Plugin.LocalNotification;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace PushNotificationPoC.Droid
 {
@@ -22,8 +20,6 @@ namespace PushNotificationPoC.Droid
         {
             base.OnCreate(savedInstanceState);
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
-            LocalNotificationCenter.MainActivity = this;
-            LocalNotificationCenter.CreateNotificationChannel();
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
@@ -35,64 +31,6 @@ namespace PushNotificationPoC.Droid
             var notificationManager = GetSystemService(NotificationService) as NotificationManager;
             notificationManager.CreateNotificationChannel(channel);
 
-            //Handle notification when app is closed here
-            //CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
-            //{
-            //    try
-            //    {
-            //// Intent for Button 1
-            //var intent1 = new Intent(Android.App.Application.Context, typeof(Button1Receiver));
-            //intent1.SetAction("Button1_Clicked");
-
-            //// Intent for Button 2
-            //var intent2 = new Intent(Android.App.Application.Context, typeof(Button2Receiver));
-            //intent2.SetAction("Button2_Clicked");
-
-            //// PendingIntent for Button 1
-            //var pendingIntent1 = PendingIntent.GetBroadcast(Android.App.Application.Context, 0, intent1, PendingIntentFlags.Immutable);
-
-            //// PendingIntent for Button 2
-            //var pendingIntent2 = PendingIntent.GetBroadcast(Android.App.Application.Context, 0, intent2, PendingIntentFlags.Immutable);
-
-            //var builder = new NotificationCompat.Builder(Android.App.Application.Context, channelId)
-            // .SetContentTitle("Notification Title")
-            // .SetContentText("Notification Text")
-            // .SetSmallIcon(Resource.Drawable.notification_bg_low_pressed)
-            // .SetLargeIcon(BitmapFactory.DecodeResource(Android.App.Application.Context.Resources, Resource.Drawable.common_full_open_on_phone))
-            // .SetAutoCancel(true);
-
-            //// Create and add buttons to the notification
-            //builder.AddAction(new NotificationCompat.Action(Resource.Drawable.chat, "Button 1", pendingIntent1));
-            //builder.AddAction(new NotificationCompat.Action(Resource.Drawable.heart, "Button 2", pendingIntent2));
-
-            //// Build and display the notification
-            //var notificationManager = NotificationManagerCompat.From(Android.App.Application.Context);
-            //notificationManager.Notify(notificationId, builder.Build());
-            //Device.BeginInvokeOnMainThread(() =>
-            //{
-            //    var body = string.Empty;
-            //    if (p.Data != null)
-            //    {
-            //        body = p.Data["body"].ToString();
-            //    }
-            //    else
-            //    {
-            //        body = p.Data["body"].ToString(); //message.Data["message"];
-            //    }
-            //    SendNotification(body, null);
-            //});
-            //}
-            //catch (System.Exception ex)
-            //{
-
-            //}
-            //};
-
-
-            LoadApplication(new App());
-
-            LocalNotificationCenter.NotifyNotificationTapped(Intent);
-
             //Set the default notification channel for your app when running Android Oreo
             if (Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.O)
             {
@@ -103,39 +41,17 @@ namespace PushNotificationPoC.Droid
                 FirebasePushNotificationManager.DefaultNotificationChannelName = "General";
             }
 
-
             //If debug you should reset the token each time.
 #if DEBUG
-            FirebasePushNotificationManager.Initialize(this,
-                          new NotificationUserCategory[]
-                          {
-                    new NotificationUserCategory("message",new List<NotificationUserAction> {
-                        new NotificationUserAction("Reply","Reply", NotificationActionType.Foreground),
-                        new NotificationUserAction("Forward","Forward", NotificationActionType.Foreground)
-
-                    }),
-                    new NotificationUserCategory("request",new List<NotificationUserAction> {
-                    new NotificationUserAction("Accept","Accept", NotificationActionType.Default, "check"),
-                    new NotificationUserAction("Reject","Reject", NotificationActionType.Default, "cancel")
-                    })
-                          }, true);
+            FirebasePushNotificationManager.Initialize(this, true);
 #else
-  FirebasePushNotificationManager.Initialize(this,
-                new NotificationUserCategory[]
-                {
-                    new NotificationUserCategory("message",new List<NotificationUserAction> {
-                        new NotificationUserAction("Reply","Reply", NotificationActionType.Foreground),
-                        new NotificationUserAction("Forward","Forward", NotificationActionType.Foreground)
-
-                    }),
-                    new NotificationUserCategory("request",new List<NotificationUserAction> {
-                    new NotificationUserAction("Accept","Accept", NotificationActionType.Default, "check"),
-                    new NotificationUserAction("Reject","Reject", NotificationActionType.Default, "cancel")
-                    })
-                }, false);
+              FirebasePushNotificationManager.Initialize(this,false);
 #endif
 
 
+            LoadApplication(new App());
+
+            FirebasePushNotificationManager.ProcessIntent(this, Intent);
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
