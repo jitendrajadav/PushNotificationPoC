@@ -79,8 +79,6 @@ namespace PushNotificationPoC
                     System.Diagnostics.Debug.WriteLine($"{data.Key} : {data.Value}");
                 }
             };
-
-
         }
 
         private void Current_OnTokenRefresh(object source, FirebasePushNotificationTokenEventArgs e)
