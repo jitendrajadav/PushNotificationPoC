@@ -1,7 +1,6 @@
 ﻿using Foundation;
 using Plugin.FirebasePushNotification;
 using System;
-using System.Collections.Generic;
 using UIKit;
 
 namespace PushNotificationPoC.iOS
@@ -25,16 +24,9 @@ namespace PushNotificationPoC.iOS
 
             LoadApplication(new App());
 
-            FirebasePushNotificationManager.Initialize(options, new NotificationUserCategory[]
-            {
-                new NotificationUserCategory("message",new List<NotificationUserAction> {
-                    new NotificationUserAction("Reply","Reply",NotificationActionType.Foreground)
-                }),
-                new NotificationUserCategory("request",new List<NotificationUserAction> {
-                    new NotificationUserAction("Accept","Accept"),
-                    new NotificationUserAction("Reject","Reject",NotificationActionType.Destructive)
-                })
-             });
+
+            FirebasePushNotificationManager.Initialize(options, true);
+
 
             return base.FinishedLaunching(app, options);
         }
